@@ -1,0 +1,113 @@
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+
+	DocumentRoot /var/www/
+
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+
+	<Directory /var/www/>
+		Options Indexes FollowSymLinks MultiViews Includes
+		AllowOverride All
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	ScriptAlias /bWAPP/cgi-bin/ /usr/lib/cgi-bin/
+	<Directory /usr/lib/cgi-bin/>
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		AllowOverride None
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	ScriptAlias /local-bin/ /usr/bin/
+	<Directory /var/www/bWAPP/admin/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		Allow from all
+		AddHandler application/x-httpd-php5 .php
+		Action application/x-httpd-php5 /local-bin/php-cgi
+	</Directory>
+
+	ErrorLog /var/log/apache2/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /var/log/apache2/access.log combined
+	ServerSignature On
+
+    	Alias /doc/ /usr/share/doc/
+    	<Directory /usr/share/doc/>
+        	Options Indexes MultiViews FollowSymLinks
+        	AllowOverride None
+        	Order deny,allow
+       		Deny from all
+        	Allow from 127.0.0.0/255.0.0.0 ::1/128
+    	</Directory>
+
+</VirtualHost>
+
+<VirtualHost *:443>
+
+	ServerAdmin webmaster@localhost
+
+	DocumentRoot /var/www/
+
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+
+	<Directory /var/www/>
+		Options Indexes FollowSymLinks MultiViews Includes
+		AllowOverride All
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	ScriptAlias /bWAPP/cgi-bin/ /usr/lib/cgi-bin/
+	<Directory /usr/lib/cgi-bin/>
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		AllowOverride None
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	ScriptAlias /local-bin/ /usr/bin/
+	<Directory /var/www/bWAPP/admin/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		Allow from all
+		AddHandler application/x-httpd-php5 .php
+		Action application/x-httpd-php5 /local-bin/php-cgi
+	</Directory>
+
+	ErrorLog /var/log/apache2/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /var/log/apache2/access.log combined
+	ServerSignature On
+
+    	Alias /doc/ /usr/share/doc/
+    	<Directory /usr/share/doc/>
+        	Options Indexes MultiViews FollowSymLinks
+        	AllowOverride None
+        	Order deny,allow
+       		Deny from all
+        	Allow from 127.0.0.0/255.0.0.0 ::1/128
+    	</Directory>
+
+	SSLEngine On
+	SSLCertificateFile /etc/ssl/certs/bee-box.pem
+
+</VirtualHost>
